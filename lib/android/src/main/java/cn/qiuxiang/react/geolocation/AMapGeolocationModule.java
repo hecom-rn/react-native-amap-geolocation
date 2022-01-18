@@ -1,5 +1,7 @@
 package cn.qiuxiang.react.geolocation;
 
+import android.util.Log;
+
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -59,6 +61,7 @@ public class AMapGeolocationModule extends ReactContextBaseJavaModule implements
 
     @ReactMethod
     public void start() {
+        Log.e("AMapGeolocationModule", "device id = " + AMapLocationClient.getDeviceId(reactContext));
         client.startLocation();
     }
 
