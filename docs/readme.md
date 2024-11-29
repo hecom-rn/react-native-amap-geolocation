@@ -28,7 +28,7 @@ await PermissionsAndroid.requestMultiple([
 // 使用自己申请的高德 App Key 进行初始化
 await init({
   ios: "9bd6c82e77583020a73ef1af59d0c759",
-  android: "043b24fe18785f33c491705ffe5b6935"
+  android: "043b24fe18785f33c491705ffe5b6935",
 });
 
 Geolocation.getCurrentPosition(({ coords }) => {
@@ -51,7 +51,7 @@ Geolocation.getCurrentPosition(({ coords }) => {
 import { init, addLocationListener, start, stop } from "react-native-amap-geolocation";
 
 // 添加定位监听函数
-addLocationListener(location => console.log(location));
+addLocationListener((location) => console.log(location));
 
 // 开始连续定位
 start();

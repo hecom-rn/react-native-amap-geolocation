@@ -1,21 +1,21 @@
-import React from "react";
+import * as React from "react";
 import {
   AppRegistry,
   Button,
+  PermissionsAndroid,
+  Platform,
+  ScrollView,
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  PermissionsAndroid,
-  Platform,
 } from "react-native";
 import {
-  init,
   Geolocation,
+  init,
   setInterval,
-  setNeedAddress,
   setLocatingWithReGeocode,
-} from "./src";
+  setNeedAddress,
+} from "react-native-amap-geolocation";
 
 const style = StyleSheet.create({
   body: {
@@ -50,18 +50,13 @@ class App extends React.Component {
       console.log(result);
     }
     await init({
-      ios: "9bd6c82e77583020a73ef1af59d0c759",
-      android: "043b24fe18785f33c491705ffe5b6935",
+      ios: "d258237d14f75e2e1bbb1654a22060cf",
+      android: "c52c7169e6df23490e3114330098aaac",
     });
-  }
-
-  componentWillUnmount() {
-    stop();
   }
 
   updateLocationState(location) {
     if (location) {
-      location.updateTime = new Date().toLocaleString();
       this.setState({ location });
       console.log(location);
     }
@@ -145,4 +140,4 @@ class App extends React.Component {
   }
 }
 
-AppRegistry.registerComponent("RNAMapGeolocation", () => App);
+AppRegistry.registerComponent("example", () => App);
