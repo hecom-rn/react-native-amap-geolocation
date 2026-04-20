@@ -19,6 +19,8 @@ RCT_REMAP_METHOD(init, initWithKey
   dispatch_async(dispatch_get_main_queue(), ^{
     [AMapServices sharedServices].apiKey = key;
     if (!(self->_manager)) {
+      [AMapLocationManager updatePrivacyShow:AMapPrivacyShowStatusDidShow privacyInfo:AMapPrivacyInfoStatusDidContain];
+      [AMapLocationManager updatePrivacyAgree:AMapPrivacyAgreeStatusDidAgree];
       self->_manager = [[AMapLocationManager alloc] init];
       self->_manager.delegate = self;
     }
