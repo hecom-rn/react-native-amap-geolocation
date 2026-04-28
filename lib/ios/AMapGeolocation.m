@@ -12,18 +12,29 @@
 
 RCT_EXPORT_MODULE()
 
+- (instancetype)init {
+  if (self = [super init]) {
+    void (^setup)(void) = ^{
+      [AMapLocationManager updatePrivacyShow:AMapPrivacyShowStatusDidShow privacyInfo:AMapPrivacyInfoStatusDidContain];
+      [AMapLocationManager updatePrivacyAgree:AMapPrivacyAgreeStatusDidAgree];
+      self->_manager = [[AMapLocationManager alloc] init];
+      self->_manager.delegate = self;
+    };
+    if ([NSThread isMainThread]) {
+      setup();
+    } else {
+      dispatch_sync(dispatch_get_main_queue(), setup);
+    }
+  }
+  return self;
+}
+
 RCT_REMAP_METHOD(init, initWithKey
                  : (NSString *)key
                  : (RCTPromiseResolveBlock)resolve
                  : (RCTPromiseRejectBlock)reject) {
   dispatch_async(dispatch_get_main_queue(), ^{
     [AMapServices sharedServices].apiKey = key;
-    [AMapLocationManager updatePrivacyAgree:AMapPrivacyAgreeStatusDidAgree];
-    [AMapLocationManager updatePrivacyShow:AMapPrivacyShowStatusDidShow privacyInfo:AMapPrivacyInfoStatusDidContain];
-    if (!(self->_manager)) {
-      self->_manager = [[AMapLocationManager alloc] init];
-      self->_manager.delegate = self;
-    }
     resolve(nil);
   });
 }
