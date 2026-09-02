@@ -64,7 +64,7 @@ RCT_EXPORT_METHOD(setDistanceFilter : (int)value) {
 }
 
 RCT_EXPORT_METHOD(setGeoLanguage : (int)value) {
-  _manager.reGeocodeLanguage = (AMapLocationReGeocodeLanguage)value;
+  _manager.reGeocodeLanguage = value;
 }
 
 RCT_EXPORT_METHOD(setReGeocodeTimeout : (int)value) {
